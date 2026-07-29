@@ -15,6 +15,17 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppSkillsRouteImport } from './routes/app.skills'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppNavigateRouteImport } from './routes/app.navigate'
+import { Route as AppMentorshipRouteImport } from './routes/app.mentorship'
+import { Route as AppLearnRouteImport } from './routes/app.learn'
+import { Route as AppFeedbackRouteImport } from './routes/app.feedback'
+import { Route as AppFacultyRouteImport } from './routes/app.faculty'
+import { Route as AppAnnouncementsRouteImport } from './routes/app.announcements'
+import { Route as AppAiRouteImport } from './routes/app.ai'
+import { Route as AppAdminRouteImport } from './routes/app.admin'
 import { Route as AppEventsIndexRouteImport } from './routes/app.events.index'
 import { Route as AppClubsIndexRouteImport } from './routes/app.clubs.index'
 import { Route as AppEventsEventIdRouteImport } from './routes/app.events.$eventId'
@@ -50,6 +61,61 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSkillsRoute = AppSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNavigateRoute = AppNavigateRouteImport.update({
+  id: '/navigate',
+  path: '/navigate',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMentorshipRoute = AppMentorshipRouteImport.update({
+  id: '/mentorship',
+  path: '/mentorship',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearnRoute = AppLearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFeedbackRoute = AppFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFacultyRoute = AppFacultyRouteImport.update({
+  id: '/faculty',
+  path: '/faculty',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAnnouncementsRoute = AppAnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiRoute = AppAiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEventsIndexRoute = AppEventsIndexRouteImport.update({
   id: '/events/',
   path: '/events/',
@@ -77,6 +143,17 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/ai': typeof AppAiRoute
+  '/app/announcements': typeof AppAnnouncementsRoute
+  '/app/faculty': typeof AppFacultyRoute
+  '/app/feedback': typeof AppFeedbackRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/mentorship': typeof AppMentorshipRoute
+  '/app/navigate': typeof AppNavigateRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/skills': typeof AppSkillsRoute
   '/app/': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
@@ -88,6 +165,17 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/ai': typeof AppAiRoute
+  '/app/announcements': typeof AppAnnouncementsRoute
+  '/app/faculty': typeof AppFacultyRoute
+  '/app/feedback': typeof AppFeedbackRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/mentorship': typeof AppMentorshipRoute
+  '/app/navigate': typeof AppNavigateRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/skills': typeof AppSkillsRoute
   '/app': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
@@ -101,6 +189,17 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/admin': typeof AppAdminRoute
+  '/app/ai': typeof AppAiRoute
+  '/app/announcements': typeof AppAnnouncementsRoute
+  '/app/faculty': typeof AppFacultyRoute
+  '/app/feedback': typeof AppFeedbackRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/mentorship': typeof AppMentorshipRoute
+  '/app/navigate': typeof AppNavigateRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/skills': typeof AppSkillsRoute
   '/app/': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
@@ -115,6 +214,17 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/admin'
+    | '/app/ai'
+    | '/app/announcements'
+    | '/app/faculty'
+    | '/app/feedback'
+    | '/app/learn'
+    | '/app/mentorship'
+    | '/app/navigate'
+    | '/app/profile'
+    | '/app/settings'
+    | '/app/skills'
     | '/app/'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
@@ -126,6 +236,17 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/admin'
+    | '/app/ai'
+    | '/app/announcements'
+    | '/app/faculty'
+    | '/app/feedback'
+    | '/app/learn'
+    | '/app/mentorship'
+    | '/app/navigate'
+    | '/app/profile'
+    | '/app/settings'
+    | '/app/skills'
     | '/app'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
@@ -138,6 +259,17 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/admin'
+    | '/app/ai'
+    | '/app/announcements'
+    | '/app/faculty'
+    | '/app/feedback'
+    | '/app/learn'
+    | '/app/mentorship'
+    | '/app/navigate'
+    | '/app/profile'
+    | '/app/settings'
+    | '/app/skills'
     | '/app/'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
@@ -197,6 +329,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/skills': {
+      id: '/app/skills'
+      path: '/skills'
+      fullPath: '/app/skills'
+      preLoaderRoute: typeof AppSkillsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/navigate': {
+      id: '/app/navigate'
+      path: '/navigate'
+      fullPath: '/app/navigate'
+      preLoaderRoute: typeof AppNavigateRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mentorship': {
+      id: '/app/mentorship'
+      path: '/mentorship'
+      fullPath: '/app/mentorship'
+      preLoaderRoute: typeof AppMentorshipRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/learn': {
+      id: '/app/learn'
+      path: '/learn'
+      fullPath: '/app/learn'
+      preLoaderRoute: typeof AppLearnRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/feedback': {
+      id: '/app/feedback'
+      path: '/feedback'
+      fullPath: '/app/feedback'
+      preLoaderRoute: typeof AppFeedbackRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/faculty': {
+      id: '/app/faculty'
+      path: '/faculty'
+      fullPath: '/app/faculty'
+      preLoaderRoute: typeof AppFacultyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/announcements': {
+      id: '/app/announcements'
+      path: '/announcements'
+      fullPath: '/app/announcements'
+      preLoaderRoute: typeof AppAnnouncementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ai': {
+      id: '/app/ai'
+      path: '/ai'
+      fullPath: '/app/ai'
+      preLoaderRoute: typeof AppAiRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/admin': {
+      id: '/app/admin'
+      path: '/admin'
+      fullPath: '/app/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/events/': {
       id: '/app/events/'
       path: '/events'
@@ -229,6 +438,17 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
+  AppAiRoute: typeof AppAiRoute
+  AppAnnouncementsRoute: typeof AppAnnouncementsRoute
+  AppFacultyRoute: typeof AppFacultyRoute
+  AppFeedbackRoute: typeof AppFeedbackRoute
+  AppLearnRoute: typeof AppLearnRoute
+  AppMentorshipRoute: typeof AppMentorshipRoute
+  AppNavigateRoute: typeof AppNavigateRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppSkillsRoute: typeof AppSkillsRoute
   AppIndexRoute: typeof AppIndexRoute
   AppClubsClubIdRoute: typeof AppClubsClubIdRoute
   AppEventsEventIdRoute: typeof AppEventsEventIdRoute
@@ -237,6 +457,17 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
+  AppAiRoute: AppAiRoute,
+  AppAnnouncementsRoute: AppAnnouncementsRoute,
+  AppFacultyRoute: AppFacultyRoute,
+  AppFeedbackRoute: AppFeedbackRoute,
+  AppLearnRoute: AppLearnRoute,
+  AppMentorshipRoute: AppMentorshipRoute,
+  AppNavigateRoute: AppNavigateRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppSkillsRoute: AppSkillsRoute,
   AppIndexRoute: AppIndexRoute,
   AppClubsClubIdRoute: AppClubsClubIdRoute,
   AppEventsEventIdRoute: AppEventsEventIdRoute,
