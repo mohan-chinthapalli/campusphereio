@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
