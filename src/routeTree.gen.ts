@@ -14,6 +14,11 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppEventsIndexRouteImport } from './routes/app.events.index'
+import { Route as AppClubsIndexRouteImport } from './routes/app.clubs.index'
+import { Route as AppEventsEventIdRouteImport } from './routes/app.events.$eventId'
+import { Route as AppClubsClubIdRouteImport } from './routes/app.clubs.$clubId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -40,40 +45,109 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEventsIndexRoute = AppEventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClubsIndexRoute = AppClubsIndexRouteImport.update({
+  id: '/clubs/',
+  path: '/clubs/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEventsEventIdRoute = AppEventsEventIdRouteImport.update({
+  id: '/events/$eventId',
+  path: '/events/$eventId',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppClubsClubIdRoute = AppClubsClubIdRouteImport.update({
+  id: '/clubs/$clubId',
+  path: '/clubs/$clubId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/': typeof AppIndexRoute
+  '/app/clubs/$clubId': typeof AppClubsClubIdRoute
+  '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/clubs/': typeof AppClubsIndexRoute
+  '/app/events/': typeof AppEventsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app': typeof AppIndexRoute
+  '/app/clubs/$clubId': typeof AppClubsClubIdRoute
+  '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/clubs': typeof AppClubsIndexRoute
+  '/app/events': typeof AppEventsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/': typeof AppIndexRoute
+  '/app/clubs/$clubId': typeof AppClubsClubIdRoute
+  '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/clubs/': typeof AppClubsIndexRoute
+  '/app/events/': typeof AppEventsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/forgot-password' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/forgot-password'
+    | '/login'
+    | '/signup'
+    | '/app/'
+    | '/app/clubs/$clubId'
+    | '/app/events/$eventId'
+    | '/app/clubs/'
+    | '/app/events/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/forgot-password' | '/login' | '/signup'
-  id: '__root__' | '/' | '/app' | '/forgot-password' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/signup'
+    | '/app'
+    | '/app/clubs/$clubId'
+    | '/app/events/$eventId'
+    | '/app/clubs'
+    | '/app/events'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/forgot-password'
+    | '/login'
+    | '/signup'
+    | '/app/'
+    | '/app/clubs/$clubId'
+    | '/app/events/$eventId'
+    | '/app/clubs/'
+    | '/app/events/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AppRoute: typeof AppRoute
+  AppRoute: typeof AppRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
@@ -116,12 +190,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/events/': {
+      id: '/app/events/'
+      path: '/events'
+      fullPath: '/app/events/'
+      preLoaderRoute: typeof AppEventsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/clubs/': {
+      id: '/app/clubs/'
+      path: '/clubs'
+      fullPath: '/app/clubs/'
+      preLoaderRoute: typeof AppClubsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/events/$eventId': {
+      id: '/app/events/$eventId'
+      path: '/events/$eventId'
+      fullPath: '/app/events/$eventId'
+      preLoaderRoute: typeof AppEventsEventIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/clubs/$clubId': {
+      id: '/app/clubs/$clubId'
+      path: '/clubs/$clubId'
+      fullPath: '/app/clubs/$clubId'
+      preLoaderRoute: typeof AppClubsClubIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppIndexRoute: typeof AppIndexRoute
+  AppClubsClubIdRoute: typeof AppClubsClubIdRoute
+  AppEventsEventIdRoute: typeof AppEventsEventIdRoute
+  AppClubsIndexRoute: typeof AppClubsIndexRoute
+  AppEventsIndexRoute: typeof AppEventsIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppIndexRoute: AppIndexRoute,
+  AppClubsClubIdRoute: AppClubsClubIdRoute,
+  AppEventsEventIdRoute: AppEventsEventIdRoute,
+  AppClubsIndexRoute: AppClubsIndexRoute,
+  AppEventsIndexRoute: AppEventsIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AppRoute: AppRoute,
+  AppRoute: AppRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
