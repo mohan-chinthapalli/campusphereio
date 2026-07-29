@@ -47,7 +47,14 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { SoftBadge } from "@/components/common";
 import { announcements, student } from "@/lib/data";
 
-const nav = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  exact?: boolean;
+};
+
+const nav: { group: string; items: NavItem[] }[] = [
   {
     group: "Campus",
     items: [
@@ -82,7 +89,7 @@ const nav = [
       { to: "/app/settings", label: "Settings", icon: Settings },
     ],
   },
-] as const;
+];
 
 const allItems = nav.flatMap((g) => g.items);
 
@@ -119,11 +126,11 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed?: boolean; onNavigat
             ) : null}
             <ul className="space-y-0.5">
               {group.items.map((item) => {
-                const active = isActive(item.to, "exact" in item ? item.exact : false);
+                const active = isActive(item.to, item.exact);
                 return (
                   <li key={item.to}>
                     <Link
-                      to={item.to}
+                      to={item.to as never}
                       onClick={onNavigate}
                       title={collapsed ? item.label : undefined}
                       className={cn(
@@ -330,7 +337,7 @@ export function AppShell() {
           <CommandGroup heading="Navigate">
             {allItems.map((item) => (
               <CommandItem key={item.to} value={item.label} asChild>
-                <Link to={item.to} onSelect={() => setCmdOpen(false)} onClick={() => setCmdOpen(false)}>
+                <Link to={item.to as never} onSelect={() => setCmdOpen(false)} onClick={() => setCmdOpen(false)}>
                   <item.icon className="mr-2 h-4 w-4" /> {item.label}
                 </Link>
               </CommandItem>
