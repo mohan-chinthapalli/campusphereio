@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Countdown, SoftBadge, Surface } from "@/components/common";
-import { events } from "@/lib/data";
+import { events, type Event } from "@/lib/data";
 
 export const Route = createFileRoute("/app/events/$eventId")({
   loader: ({ params }) => {
@@ -62,7 +62,7 @@ function EventDetail() {
       <section className={`relative overflow-hidden rounded-3xl bg-gradient-to-br p-6 text-primary-foreground sm:p-10 ${event.gradient}`}>
         <div className="flex flex-wrap items-center gap-2">
           <SoftBadge tone="muted" className="bg-card/20 text-primary-foreground">{event.category}</SoftBadge>
-          {event.tags.map((tag) => (
+          {event.tags.map((tag: string) => (
             <SoftBadge key={tag} tone="muted" className="bg-card/15 text-primary-foreground">{tag}</SoftBadge>
           ))}
         </div>
@@ -98,7 +98,7 @@ function EventDetail() {
             <TabsContent value="agenda" className="mt-4">
               <Surface>
                 <ul className="space-y-3">
-                  {event.agenda.map((a) => (
+                  {event.agenda.map((a: Event["agenda"][number]) => (
                     <li key={a.time} className="flex gap-4 border-l-2 border-primary pl-4">
                       <span className="w-14 shrink-0 font-display text-sm font-semibold">{a.time}</span>
                       <span className="text-sm text-muted-foreground">{a.title}</span>
@@ -109,7 +109,7 @@ function EventDetail() {
             </TabsContent>
             <TabsContent value="gallery" className="mt-4">
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {event.gallery.map((g, i) => (
+                {event.gallery.map((g: string, i: number) => (
                   <div key={g} className={`grid aspect-square place-items-center rounded-2xl bg-gradient-to-br p-3 text-center text-xs font-medium text-primary-foreground ${event.gradient}`} style={{ opacity: 1 - i * 0.12 }}>
                     {g}
                   </div>
@@ -119,7 +119,7 @@ function EventDetail() {
             <TabsContent value="discussion" className="mt-4">
               <Surface>
                 <ul className="space-y-4">
-                  {event.discussion.map((d, i) => (
+                  {event.discussion.map((d: Event["discussion"][number], i: number) => (
                     <li key={i} className="flex gap-3">
                       <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent text-xs font-semibold text-accent-foreground">
                         {d.user.slice(0, 2).toUpperCase()}
@@ -159,7 +159,7 @@ function EventDetail() {
             <p className="font-display text-sm font-semibold">Organizer</p>
             <div className="mt-3 flex items-center gap-3">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent text-sm font-semibold text-accent-foreground">
-                {event.organizer.name.split(" ").map((n) => n[0]).join("")}
+                {event.organizer.name.split(" ").map((n: string) => n[0]).join("")}
               </span>
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium">{event.organizer.name}</p>
