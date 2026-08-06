@@ -24,6 +24,7 @@ import { Route as AppLearnRouteImport } from './routes/app.learn'
 import { Route as AppFeedbackRouteImport } from './routes/app.feedback'
 import { Route as AppAnnouncementsRouteImport } from './routes/app.announcements'
 import { Route as AppAiRouteImport } from './routes/app.ai'
+import { Route as AppAcademicsRouteImport } from './routes/app.academics'
 import { Route as AppEventsIndexRouteImport } from './routes/app.events.index'
 import { Route as AppClubsIndexRouteImport } from './routes/app.clubs.index'
 import { Route as AppEventsEventIdRouteImport } from './routes/app.events.$eventId'
@@ -104,6 +105,11 @@ const AppAiRoute = AppAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAcademicsRoute = AppAcademicsRouteImport.update({
+  id: '/academics',
+  path: '/academics',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEventsIndexRoute = AppEventsIndexRouteImport.update({
   id: '/events/',
   path: '/events/',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/academics': typeof AppAcademicsRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
@@ -151,6 +158,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/academics': typeof AppAcademicsRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
@@ -173,6 +181,7 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/academics': typeof AppAcademicsRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/academics'
     | '/app/ai'
     | '/app/announcements'
     | '/app/feedback'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/academics'
     | '/app/ai'
     | '/app/announcements'
     | '/app/feedback'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
+    | '/app/academics'
     | '/app/ai'
     | '/app/announcements'
     | '/app/feedback'
@@ -368,6 +380,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAiRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/academics': {
+      id: '/app/academics'
+      path: '/academics'
+      fullPath: '/app/academics'
+      preLoaderRoute: typeof AppAcademicsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/events/': {
       id: '/app/events/'
       path: '/events'
@@ -400,6 +419,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAcademicsRoute: typeof AppAcademicsRoute
   AppAiRoute: typeof AppAiRoute
   AppAnnouncementsRoute: typeof AppAnnouncementsRoute
   AppFeedbackRoute: typeof AppFeedbackRoute
@@ -417,6 +437,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAcademicsRoute: AppAcademicsRoute,
   AppAiRoute: AppAiRoute,
   AppAnnouncementsRoute: AppAnnouncementsRoute,
   AppFeedbackRoute: AppFeedbackRoute,

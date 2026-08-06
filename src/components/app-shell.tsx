@@ -9,6 +9,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   LibraryBig,
+  Lock,
   Map,
   Megaphone,
   MessageSquareHeart,
@@ -76,6 +77,7 @@ const nav: { group: string; items: NavItem[] }[] = [
   {
     group: "You",
     items: [
+      { to: "/app/academics", label: "My Academics", icon: Lock },
       { to: "/app/profile", label: "Profile", icon: User },
       { to: "/app/feedback", label: "Feedback", icon: Sparkles },
       { to: "/app/settings", label: "Settings", icon: Settings },
