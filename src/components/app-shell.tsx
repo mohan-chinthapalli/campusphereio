@@ -9,6 +9,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   LibraryBig,
+  Lock,
   Map,
   Megaphone,
   MessageSquareHeart,
