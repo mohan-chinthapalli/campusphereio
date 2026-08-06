@@ -73,7 +73,7 @@ function ClubDetail() {
               <Surface>
                 <h3 className="font-display text-sm font-semibold">Upcoming</h3>
                 <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  {club.upcoming.map((e) => (
+                  {club.upcoming.map((e: string) => (
                     <li key={e} className="flex items-center gap-2"><CalendarDays className="h-4 w-4 shrink-0 text-primary" />{e}</li>
                   ))}
                 </ul>
@@ -81,13 +81,13 @@ function ClubDetail() {
               <Surface>
                 <h3 className="font-display text-sm font-semibold">Past</h3>
                 <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  {club.past.map((e) => <li key={e}>{e}</li>)}
+                  {club.past.map((e: string) => <li key={e}>{e}</li>)}
                 </ul>
               </Surface>
             </TabsContent>
             <TabsContent value="gallery" className="mt-4">
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {club.gallery.map((g, i) => (
+                {club.gallery.map((g: string, i: number) => (
                   <div key={g} className={`grid aspect-square place-items-center rounded-2xl bg-gradient-to-br p-3 text-center text-xs font-medium text-primary-foreground ${club.gradient}`} style={{ opacity: 1 - i * 0.12 }}>{g}</div>
                 ))}
               </div>
@@ -95,7 +95,7 @@ function ClubDetail() {
             <TabsContent value="wins" className="mt-4">
               <Surface>
                 <ul className="space-y-3 text-sm">
-                  {club.achievements.map((a) => (
+                  {club.achievements.map((a: string) => (
                     <li key={a} className="flex gap-3"><Award className="h-4 w-4 shrink-0 text-warning" />{a}</li>
                   ))}
                 </ul>
@@ -111,10 +111,10 @@ function ClubDetail() {
             <p className="text-sm font-medium">{club.coordinator}</p>
             <p className="mt-4 text-xs text-muted-foreground">Student leads</p>
             <ul className="mt-2 space-y-2">
-              {club.leads.map((l) => (
+              {club.leads.map((l: Club["leads"][number]) => (
                 <li key={l.name} className="flex items-center gap-3">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent text-xs font-semibold text-accent-foreground">
-                    {l.name.split(" ").map((n) => n[0]).join("")}
+                    {l.name.split(" ").map((n: string) => n[0]).join("")}
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium">{l.name}</p>
@@ -127,7 +127,7 @@ function ClubDetail() {
           <Surface>
             <p className="flex items-center gap-2 font-display text-sm font-semibold"><Users className="h-4 w-4" /> {club.members.toLocaleString()} members</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              {club.socials.map((s) => <SoftBadge key={s.label} tone="brand">{s.label} · {s.handle}</SoftBadge>)}
+            {club.socials.map((s: Club["socials"][number]) => <SoftBadge key={s.label} tone="brand">{s.label} · {s.handle}</SoftBadge>)}
             </div>
           </Surface>
           <Surface>
