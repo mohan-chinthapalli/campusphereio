@@ -76,13 +76,6 @@ const nav: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
-    group: "Workspaces",
-    items: [
-      { to: "/app/faculty", label: "Faculty Console", icon: Building2 },
-      { to: "/app/admin", label: "Admin Console", icon: ShieldCheck },
-    ],
-  },
-  {
     group: "You",
     items: [
       { to: "/app/profile", label: "Profile", icon: User },
