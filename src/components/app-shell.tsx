@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   Bell,
   Bot,
-  Building2,
   CalendarDays,
   ChevronRight,
   GraduationCap,
@@ -17,7 +16,6 @@ import {
   PanelLeftOpen,
   Search,
   Settings,
-  ShieldCheck,
   Sparkles,
   User,
   Users,
@@ -73,13 +71,6 @@ const nav: { group: string; items: NavItem[] }[] = [
       { to: "/app/skills", label: "Faculty Skill Hub", icon: GraduationCap },
       { to: "/app/mentorship", label: "Mentorship", icon: MessageSquareHeart },
       { to: "/app/ai", label: "Ask AI", icon: Bot },
-    ],
-  },
-  {
-    group: "Workspaces",
-    items: [
-      { to: "/app/faculty", label: "Faculty Console", icon: Building2 },
-      { to: "/app/admin", label: "Admin Console", icon: ShieldCheck },
     ],
   },
   {
