@@ -70,7 +70,6 @@ function SignupPage() {
             <SelectContent>
               <SelectItem value="student">Student</SelectItem>
               <SelectItem value="faculty">Faculty</SelectItem>
-              <SelectItem value="club">Club leader</SelectItem>
               <SelectItem value="admin">Administration</SelectItem>
             </SelectContent>
           </Select>
