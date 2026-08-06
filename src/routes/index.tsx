@@ -236,7 +236,7 @@ function Landing() {
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
                   <Button variant="glass" size="lg" asChild>
-                    <Link to="/app/admin">See the admin console</Link>
+                    <Link to="/app">Explore the platform</Link>
                   </Button>
                   <Button variant="glass" size="lg" asChild>
                     <Link to="/signup">Request a demo</Link>

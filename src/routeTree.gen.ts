@@ -22,10 +22,8 @@ import { Route as AppNavigateRouteImport } from './routes/app.navigate'
 import { Route as AppMentorshipRouteImport } from './routes/app.mentorship'
 import { Route as AppLearnRouteImport } from './routes/app.learn'
 import { Route as AppFeedbackRouteImport } from './routes/app.feedback'
-import { Route as AppFacultyRouteImport } from './routes/app.faculty'
 import { Route as AppAnnouncementsRouteImport } from './routes/app.announcements'
 import { Route as AppAiRouteImport } from './routes/app.ai'
-import { Route as AppAdminRouteImport } from './routes/app.admin'
 import { Route as AppEventsIndexRouteImport } from './routes/app.events.index'
 import { Route as AppClubsIndexRouteImport } from './routes/app.clubs.index'
 import { Route as AppEventsEventIdRouteImport } from './routes/app.events.$eventId'
@@ -96,11 +94,6 @@ const AppFeedbackRoute = AppFeedbackRouteImport.update({
   path: '/feedback',
   getParentRoute: () => AppRoute,
 } as any)
-const AppFacultyRoute = AppFacultyRouteImport.update({
-  id: '/faculty',
-  path: '/faculty',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppAnnouncementsRoute = AppAnnouncementsRouteImport.update({
   id: '/announcements',
   path: '/announcements',
@@ -109,11 +102,6 @@ const AppAnnouncementsRoute = AppAnnouncementsRouteImport.update({
 const AppAiRoute = AppAiRouteImport.update({
   id: '/ai',
   path: '/ai',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAdminRoute = AppAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEventsIndexRoute = AppEventsIndexRouteImport.update({
@@ -143,10 +131,8 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/app/admin': typeof AppAdminRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
-  '/app/faculty': typeof AppFacultyRoute
   '/app/feedback': typeof AppFeedbackRoute
   '/app/learn': typeof AppLearnRoute
   '/app/mentorship': typeof AppMentorshipRoute
@@ -165,10 +151,8 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/app/admin': typeof AppAdminRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
-  '/app/faculty': typeof AppFacultyRoute
   '/app/feedback': typeof AppFeedbackRoute
   '/app/learn': typeof AppLearnRoute
   '/app/mentorship': typeof AppMentorshipRoute
@@ -189,10 +173,8 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
-  '/app/admin': typeof AppAdminRoute
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
-  '/app/faculty': typeof AppFacultyRoute
   '/app/feedback': typeof AppFeedbackRoute
   '/app/learn': typeof AppLearnRoute
   '/app/mentorship': typeof AppMentorshipRoute
@@ -214,10 +196,8 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
-    | '/app/admin'
     | '/app/ai'
     | '/app/announcements'
-    | '/app/faculty'
     | '/app/feedback'
     | '/app/learn'
     | '/app/mentorship'
@@ -236,10 +216,8 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
-    | '/app/admin'
     | '/app/ai'
     | '/app/announcements'
-    | '/app/faculty'
     | '/app/feedback'
     | '/app/learn'
     | '/app/mentorship'
@@ -259,10 +237,8 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/login'
     | '/signup'
-    | '/app/admin'
     | '/app/ai'
     | '/app/announcements'
-    | '/app/faculty'
     | '/app/feedback'
     | '/app/learn'
     | '/app/mentorship'
@@ -378,13 +354,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFeedbackRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/faculty': {
-      id: '/app/faculty'
-      path: '/faculty'
-      fullPath: '/app/faculty'
-      preLoaderRoute: typeof AppFacultyRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/app/announcements': {
       id: '/app/announcements'
       path: '/announcements'
@@ -397,13 +366,6 @@ declare module '@tanstack/react-router' {
       path: '/ai'
       fullPath: '/app/ai'
       preLoaderRoute: typeof AppAiRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/admin': {
-      id: '/app/admin'
-      path: '/admin'
-      fullPath: '/app/admin'
-      preLoaderRoute: typeof AppAdminRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/events/': {
@@ -438,10 +400,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
-  AppAdminRoute: typeof AppAdminRoute
   AppAiRoute: typeof AppAiRoute
   AppAnnouncementsRoute: typeof AppAnnouncementsRoute
-  AppFacultyRoute: typeof AppFacultyRoute
   AppFeedbackRoute: typeof AppFeedbackRoute
   AppLearnRoute: typeof AppLearnRoute
   AppMentorshipRoute: typeof AppMentorshipRoute
@@ -457,10 +417,8 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
-  AppAdminRoute: AppAdminRoute,
   AppAiRoute: AppAiRoute,
   AppAnnouncementsRoute: AppAnnouncementsRoute,
-  AppFacultyRoute: AppFacultyRoute,
   AppFeedbackRoute: AppFeedbackRoute,
   AppLearnRoute: AppLearnRoute,
   AppMentorshipRoute: AppMentorshipRoute,
@@ -487,3 +445,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
