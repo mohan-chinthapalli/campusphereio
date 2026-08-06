@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SoftBadge, Surface } from "@/components/common";
-import { clubs } from "@/lib/data";
+import { clubs, type Club } from "@/lib/data";
 
 export const Route = createFileRoute("/app/clubs/$clubId")({
   loader: ({ params }) => {

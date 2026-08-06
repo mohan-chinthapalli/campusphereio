@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Countdown, SoftBadge, Surface } from "@/components/common";
-import { events } from "@/lib/data";
+import { events, type Event } from "@/lib/data";
 
 export const Route = createFileRoute("/app/events/$eventId")({
   loader: ({ params }) => {
