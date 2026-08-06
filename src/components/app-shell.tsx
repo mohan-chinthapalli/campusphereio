@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   Bell,
   Bot,
-  Building2,
   CalendarDays,
   ChevronRight,
   GraduationCap,
@@ -17,7 +16,6 @@ import {
   PanelLeftOpen,
   Search,
   Settings,
-  ShieldCheck,
   Sparkles,
   User,
   Users,
