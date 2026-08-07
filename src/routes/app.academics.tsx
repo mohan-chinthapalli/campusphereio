@@ -112,8 +112,6 @@ function Academics() {
             </div>
           </Surface>
         </div>
-
-        </div>
       </div>
     </div>
   );
