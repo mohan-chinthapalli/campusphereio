@@ -1,25 +1,39 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Lock, Timer } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { PageHeader, ProgressRing, SectionTitle, SoftBadge, StatCard, Surface } from "@/components/common";
-import { classes, deadlines, learningProgress, student, weekActivity } from "@/lib/data";
+import { classes, enrolledSessions, skillSessions, student, weekActivity } from "@/lib/data";
 
 export const Route = createFileRoute("/app/academics")({
   head: () => ({
     meta: [
       { title: "My Academics — CampuSphere" },
-      { name: "description", content: "Private academic record: CGPA, attendance, credits, timetable, deadlines and learning progress." },
+      { name: "description", content: "Private academic record: CGPA, attendance, credits, timetable and Skill Hub learning progress." },
       { property: "og:title", content: "My Academics — CampuSphere" },
-      { property: "og:description", content: "Private academic record: CGPA, attendance, credits, timetable, deadlines and learning progress." },
+      { property: "og:description", content: "Private academic record: CGPA, attendance, credits, timetable and Skill Hub learning progress." },
       { name: "robots", content: "noindex" },
     ],
   }),
   component: Academics,
 });
 
+
 function Academics() {
   const max = Math.max(...weekActivity.map((d) => d.hours));
+  const enrolled = enrolledSessions.flatMap((e) => {
+    const session = skillSessions.find((s) => s.id === e.sessionId);
+    if (!session) return [];
+    return [{
+      session,
+      completed: e.completed,
+      lastActivity: e.lastActivity,
+      value: Math.round((e.completed / session.sessions) * 100),
+    }];
+  });
+  const totalDone = enrolled.reduce((a, e) => a + e.completed, 0);
+  const totalModules = enrolled.reduce((a, e) => a + e.session.sessions, 0);
+  const overall = totalModules ? Math.round((totalDone / totalModules) * 100) : 0;
   return (
     <div className="space-y-8">
       <PageHeader
@@ -84,28 +98,28 @@ function Academics() {
 
         <div className="space-y-6">
           <Surface>
-            <SectionTitle title="Upcoming deadlines" />
-            <ul className="space-y-2">
-              {deadlines.map((d) => (
-                <li key={d.id} className="flex items-start gap-3 rounded-xl border border-border p-3">
-                  <Timer className={d.urgency === "high" ? "mt-0.5 h-4 w-4 shrink-0 text-destructive" : "mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"} />
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-medium">{d.title}</p>
-                    <p className="text-xs text-muted-foreground">{d.course} · {d.due}</p>
+            <SectionTitle
+              title="Learning progress"
+              hint="From your Faculty Skill Hub enrolments"
+              action={<Button variant="ghost" size="sm" asChild><Link to="/app/skills">Skill Hub <ArrowRight /></Link></Button>}
+            />
+            <div className="space-y-5">
+              <ProgressRing value={overall} label={`${totalDone} of ${totalModules} modules completed`} />
+              {enrolled.map((e) => (
+                <div key={e.session.id} className="rounded-xl border border-border p-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent">{e.session.emoji}</span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{e.session.title}</p>
+                      <p className="truncate text-xs text-muted-foreground">{e.session.faculty} · {e.session.schedule}</p>
+                    </div>
+                    <span className="shrink-0 text-xs font-medium text-muted-foreground">{e.value}%</span>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </Surface>
-
-          <Surface>
-            <SectionTitle title="Learning progress" action={<Button variant="ghost" size="sm" asChild><Link to="/app/learn">Hub</Link></Button>} />
-            <div className="space-y-4">
-              <ProgressRing value={68} label="DSA Mastery · 14 modules" />
-              {learningProgress.map((p) => (
-                <div key={p.name}>
-                  <div className="flex justify-between text-xs"><span>{p.name}</span><span className="text-muted-foreground">{p.value}%</span></div>
-                  <Progress value={p.value} className="mt-1.5 h-1.5" />
+                  <Progress value={e.value} className="mt-3 h-1.5" />
+                  <div className="mt-2 flex items-center justify-between text-[11px] text-muted-foreground">
+                    <span>{e.completed}/{e.session.sessions} modules</span>
+                    <span>Last activity · {e.lastActivity}</span>
+                  </div>
                 </div>
               ))}
             </div>
