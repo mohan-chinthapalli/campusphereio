@@ -606,11 +606,21 @@ export const mentors: Mentor[] = [
   },
 ];
 
+export type MaterialType =
+  | "Notes"
+  | "PDF"
+  | "Video"
+  | "Paper"
+  | "Handwritten"
+  | "Lab Manual"
+  | "Syllabus";
+
 export type Material = {
   id: string;
   title: string;
-  type: "Notes" | "PDF" | "Video" | "Paper";
+  type: MaterialType;
   subject: string;
+  semester: number;
   author: string;
   size: string;
   progress: number;
@@ -619,16 +629,141 @@ export type Material = {
   emoji: string;
 };
 
-export const materials: Material[] = [
-  { id: "m1", title: "Operating Systems — Complete Notes", type: "Notes", subject: "OS", author: "Dr. Shalini Reddy", size: "4.2 MB", progress: 72, downloads: 3120, bookmarked: true, emoji: "🖥️" },
-  { id: "m2", title: "DBMS Previous Year Papers (2019–2025)", type: "Paper", subject: "DBMS", author: "Exam Cell", size: "8.9 MB", progress: 30, downloads: 5402, bookmarked: true, emoji: "🗄️" },
-  { id: "m3", title: "Graph Algorithms Masterclass", type: "Video", subject: "DSA", author: "Dr. Shalini Reddy", size: "1h 48m", progress: 55, downloads: 2210, bookmarked: false, emoji: "🧩" },
-  { id: "m4", title: "Computer Networks Handbook", type: "PDF", subject: "CN", author: "Prof. Rajeev Menon", size: "6.1 MB", progress: 12, downloads: 1890, bookmarked: false, emoji: "🌐" },
-  { id: "m5", title: "Linear Algebra Crash Notes", type: "Notes", subject: "Maths", author: "Dr. P. Nandakumar", size: "2.4 MB", progress: 100, downloads: 4110, bookmarked: true, emoji: "📐" },
-  { id: "m6", title: "Machine Learning Lecture Series", type: "Video", subject: "ML", author: "Dr. Vikram Iyer", size: "6h 20m", progress: 41, downloads: 3780, bookmarked: false, emoji: "🤖" },
-  { id: "m7", title: "Digital Electronics Solved Problems", type: "PDF", subject: "DE", author: "Prof. Meenakshi Nair", size: "3.8 MB", progress: 0, downloads: 1420, bookmarked: false, emoji: "🔌" },
-  { id: "m8", title: "Compiler Design Question Bank", type: "Paper", subject: "CD", author: "Exam Cell", size: "2.9 MB", progress: 0, downloads: 980, bookmarked: false, emoji: "🛠️" },
+export const materialTypes: MaterialType[] = [
+  "Notes",
+  "Handwritten",
+  "PDF",
+  "Paper",
+  "Video",
+  "Lab Manual",
+  "Syllabus",
 ];
+
+type SemesterSubject = { code: string; name: string; emoji: string; faculty: string };
+
+export const semesterCatalog: { semester: number; label: string; year: string; subjects: SemesterSubject[] }[] = [
+  {
+    semester: 1,
+    label: "Semester 1",
+    year: "First Year",
+    subjects: [
+      { code: "MA101", name: "Engineering Mathematics I", emoji: "📐", faculty: "Dr. P. Nandakumar" },
+      { code: "PH102", name: "Engineering Physics", emoji: "🔭", faculty: "Dr. Anita Sharma" },
+      { code: "CS103", name: "Problem Solving with C", emoji: "💻", faculty: "Prof. Rajeev Menon" },
+      { code: "EG104", name: "Engineering Graphics", emoji: "📏", faculty: "Prof. S. Balaji" },
+    ],
+  },
+  {
+    semester: 2,
+    label: "Semester 2",
+    year: "First Year",
+    subjects: [
+      { code: "MA201", name: "Engineering Mathematics II", emoji: "➗", faculty: "Dr. P. Nandakumar" },
+      { code: "CH202", name: "Engineering Chemistry", emoji: "⚗️", faculty: "Dr. Kavya Rao" },
+      { code: "CS203", name: "Object Oriented Programming", emoji: "🧱", faculty: "Prof. Rajeev Menon" },
+      { code: "EE204", name: "Basic Electrical Engineering", emoji: "🔌", faculty: "Prof. Meenakshi Nair" },
+    ],
+  },
+  {
+    semester: 3,
+    label: "Semester 3",
+    year: "Second Year",
+    subjects: [
+      { code: "CS301", name: "Data Structures", emoji: "🧩", faculty: "Dr. Shalini Reddy" },
+      { code: "CS302", name: "Digital Electronics", emoji: "🔢", faculty: "Prof. Meenakshi Nair" },
+      { code: "MA303", name: "Discrete Mathematics", emoji: "🎲", faculty: "Dr. P. Nandakumar" },
+      { code: "CS304", name: "Computer Organisation", emoji: "🖧", faculty: "Prof. S. Balaji" },
+    ],
+  },
+  {
+    semester: 4,
+    label: "Semester 4",
+    year: "Second Year",
+    subjects: [
+      { code: "CS401", name: "Design & Analysis of Algorithms", emoji: "⚡", faculty: "Dr. Shalini Reddy" },
+      { code: "CS402", name: "Operating Systems", emoji: "🖥️", faculty: "Dr. Shalini Reddy" },
+      { code: "CS403", name: "Database Management Systems", emoji: "🗄️", faculty: "Prof. Rajeev Menon" },
+      { code: "MA404", name: "Probability & Statistics", emoji: "📊", faculty: "Dr. Kavya Rao" },
+    ],
+  },
+  {
+    semester: 5,
+    label: "Semester 5",
+    year: "Third Year",
+    subjects: [
+      { code: "CS501", name: "Computer Networks", emoji: "🌐", faculty: "Prof. Rajeev Menon" },
+      { code: "CS502", name: "Theory of Computation", emoji: "🧠", faculty: "Dr. Vikram Iyer" },
+      { code: "CS503", name: "Software Engineering", emoji: "🛠️", faculty: "Prof. S. Balaji" },
+      { code: "CS504", name: "Web Technologies", emoji: "🕸️", faculty: "Prof. Meenakshi Nair" },
+    ],
+  },
+  {
+    semester: 6,
+    label: "Semester 6",
+    year: "Third Year",
+    subjects: [
+      { code: "CS601", name: "Machine Learning", emoji: "🤖", faculty: "Dr. Vikram Iyer" },
+      { code: "CS602", name: "Compiler Design", emoji: "🧾", faculty: "Dr. Shalini Reddy" },
+      { code: "CS603", name: "Cloud Computing", emoji: "☁️", faculty: "Prof. Rajeev Menon" },
+      { code: "CS604", name: "Cryptography & Security", emoji: "🔐", faculty: "Dr. Kavya Rao" },
+    ],
+  },
+  {
+    semester: 7,
+    label: "Semester 7",
+    year: "Final Year",
+    subjects: [
+      { code: "CS701", name: "Deep Learning", emoji: "🧬", faculty: "Dr. Vikram Iyer" },
+      { code: "CS702", name: "Big Data Analytics", emoji: "📈", faculty: "Dr. Kavya Rao" },
+      { code: "CS703", name: "Internet of Things", emoji: "📡", faculty: "Prof. Meenakshi Nair" },
+      { code: "CS704", name: "Major Project Phase I", emoji: "🚀", faculty: "Project Cell" },
+    ],
+  },
+  {
+    semester: 8,
+    label: "Semester 8",
+    year: "Final Year",
+    subjects: [
+      { code: "CS801", name: "Distributed Systems", emoji: "🛰️", faculty: "Prof. S. Balaji" },
+      { code: "CS802", name: "Generative AI Systems", emoji: "✨", faculty: "Dr. Vikram Iyer" },
+      { code: "CS803", name: "Professional Ethics", emoji: "⚖️", faculty: "Dr. Anita Sharma" },
+      { code: "CS804", name: "Major Project Phase II", emoji: "🏁", faculty: "Project Cell" },
+    ],
+  },
+];
+
+const typeMeta: Record<MaterialType, { suffix: string; author?: string; size: (n: number) => string }> = {
+  Notes: { suffix: "— Complete Notes", size: (n) => `${(2 + (n % 7)).toFixed(1)} MB` },
+  Handwritten: { suffix: "— Handwritten Notes (Topper)", author: "Student Toppers Archive", size: (n) => `${(5 + (n % 9)).toFixed(1)} MB` },
+  PDF: { suffix: "— Reference Textbook PDF", size: (n) => `${(8 + (n % 12)).toFixed(1)} MB` },
+  Paper: { suffix: "— Previous Year Papers (2019–2025)", author: "Examination Cell", size: (n) => `${(1 + (n % 4)).toFixed(1)} MB` },
+  Video: { suffix: "— Lecture Video Series", size: (n) => `${2 + (n % 6)}h ${10 + (n % 45)}m` },
+  "Lab Manual": { suffix: "— Lab Manual & Solutions", size: (n) => `${(1 + (n % 5)).toFixed(1)} MB` },
+  Syllabus: { suffix: "— Official Syllabus & Scheme", author: "Academic Office", size: (n) => `${(0.3 + (n % 3) / 10).toFixed(1)} MB` },
+};
+
+export const materials: Material[] = semesterCatalog.flatMap((sem) =>
+  sem.subjects.flatMap((subject, si) =>
+    materialTypes.map((type, ti) => {
+      const seed = sem.semester * 31 + si * 7 + ti * 3;
+      const meta = typeMeta[type];
+      return {
+        id: `m-${sem.semester}-${subject.code}-${type.replace(/\s/g, "")}`,
+        title: `${subject.name} ${meta.suffix}`,
+        type,
+        subject: subject.code,
+        semester: sem.semester,
+        author: meta.author ?? subject.faculty,
+        size: meta.size(seed),
+        progress: sem.semester <= 6 ? (seed * 13) % 101 : 0,
+        downloads: 400 + ((seed * 137) % 5200),
+        bookmarked: seed % 11 === 0,
+        emoji: subject.emoji,
+      } satisfies Material;
+    })
+  )
+);
+
 
 export const announcements = [
   {
