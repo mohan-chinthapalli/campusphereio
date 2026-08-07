@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { SoftBadge } from "@/components/common";
-import type { Club, Event, Material, Mentor, Session } from "@/lib/data";
+import type { Club, Event, Material, MaterialType, Mentor, Session } from "@/lib/data";
 
 export function EventCard({ event }: { event: Event }) {
   const [saved, setSaved] = useState(false);
