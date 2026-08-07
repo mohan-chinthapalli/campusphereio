@@ -72,7 +72,7 @@ function LearnPage() {
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search “DBMS question papers”, “handwritten DSA notes”, “Sem 3 lab manual”…"
             aria-label="Search study materials"
-            className="h-13 rounded-2xl border-border/70 pl-11 pr-11 text-sm shadow-sm"
+            className="h-12 rounded-2xl border-border/70 pl-11 pr-11 text-sm shadow-sm"
           />
           {q && (
             <button
