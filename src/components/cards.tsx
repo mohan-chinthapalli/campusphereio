@@ -243,12 +243,16 @@ export function MentorCard({ mentor }: { mentor: Mentor }) {
   );
 }
 
-const typeIcon = {
+const typeIcon: Record<MaterialType, typeof BookOpen> = {
   Notes: BookOpen,
   PDF: FileText,
   Video: PlayCircle,
   Paper: FileText,
+  Handwritten: PenLine,
+  "Lab Manual": FlaskConical,
+  Syllabus: ListChecks,
 };
+
 
 export function MaterialCard({ material }: { material: Material }) {
   const Icon = typeIcon[material.type];
