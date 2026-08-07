@@ -1,22 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Lock, Timer } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { PageHeader, ProgressRing, SectionTitle, SoftBadge, StatCard, Surface } from "@/components/common";
-import { classes, deadlines, learningProgress, student, weekActivity } from "@/lib/data";
+import { classes, enrolledSessions, skillSessions, student, weekActivity } from "@/lib/data";
 
 export const Route = createFileRoute("/app/academics")({
   head: () => ({
     meta: [
       { title: "My Academics — CampuSphere" },
-      { name: "description", content: "Private academic record: CGPA, attendance, credits, timetable, deadlines and learning progress." },
+      { name: "description", content: "Private academic record: CGPA, attendance, credits, timetable and Skill Hub learning progress." },
       { property: "og:title", content: "My Academics — CampuSphere" },
-      { property: "og:description", content: "Private academic record: CGPA, attendance, credits, timetable, deadlines and learning progress." },
+      { property: "og:description", content: "Private academic record: CGPA, attendance, credits, timetable and Skill Hub learning progress." },
       { name: "robots", content: "noindex" },
     ],
   }),
   component: Academics,
 });
+
 
 function Academics() {
   const max = Math.max(...weekActivity.map((d) => d.hours));
