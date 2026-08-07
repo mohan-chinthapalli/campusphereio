@@ -12,6 +12,9 @@ import {
   PlayCircle,
   FileText,
   BookOpen,
+  PenLine,
+  FlaskConical,
+  ListChecks,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -19,7 +22,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { SoftBadge } from "@/components/common";
-import type { Club, Event, Material, Mentor, Session } from "@/lib/data";
+import type { Club, Event, Material, MaterialType, Mentor, Session } from "@/lib/data";
 
 export function EventCard({ event }: { event: Event }) {
   const [saved, setSaved] = useState(false);
@@ -243,12 +246,16 @@ export function MentorCard({ mentor }: { mentor: Mentor }) {
   );
 }
 
-const typeIcon = {
+const typeIcon: Record<MaterialType, typeof BookOpen> = {
   Notes: BookOpen,
   PDF: FileText,
   Video: PlayCircle,
   Paper: FileText,
+  Handwritten: PenLine,
+  "Lab Manual": FlaskConical,
+  Syllabus: ListChecks,
 };
+
 
 export function MaterialCard({ material }: { material: Material }) {
   const Icon = typeIcon[material.type];
