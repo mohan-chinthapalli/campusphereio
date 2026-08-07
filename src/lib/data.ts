@@ -766,6 +766,15 @@ export const learningProgress = [
   { name: "Cloud Native", value: 85, color: "var(--color-chart-3)" },
 ];
 
+/** Skill Hub enrolments — learning progress is tied to enrolled faculty sessions. */
+export const enrolledSessions = [
+  { sessionId: "dsa-mastery", completed: 8, lastActivity: "Yesterday" },
+  { sessionId: "applied-ai", completed: 3, lastActivity: "2 days ago" },
+  { sessionId: "cloud-native", completed: 5, lastActivity: "Today" },
+  { sessionId: "public-speaking", completed: 1, lastActivity: "Last week" },
+];
+
+
 export const adminStats = [
   { label: "Active students", value: "18,420", delta: "+4.2%" },
   { label: "Events this month", value: "126", delta: "+18%" },
