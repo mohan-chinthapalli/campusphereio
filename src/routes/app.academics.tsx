@@ -21,6 +21,19 @@ export const Route = createFileRoute("/app/academics")({
 
 function Academics() {
   const max = Math.max(...weekActivity.map((d) => d.hours));
+  const enrolled = enrolledSessions.flatMap((e) => {
+    const session = skillSessions.find((s) => s.id === e.sessionId);
+    if (!session) return [];
+    return [{
+      session,
+      completed: e.completed,
+      lastActivity: e.lastActivity,
+      value: Math.round((e.completed / session.sessions) * 100),
+    }];
+  });
+  const totalDone = enrolled.reduce((a, e) => a + e.completed, 0);
+  const totalModules = enrolled.reduce((a, e) => a + e.session.sessions, 0);
+  const overall = totalModules ? Math.round((totalDone / totalModules) * 100) : 0;
   return (
     <div className="space-y-8">
       <PageHeader
