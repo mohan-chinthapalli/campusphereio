@@ -27,6 +27,7 @@ import { Route as AppAiRouteImport } from './routes/app.ai'
 import { Route as AppAcademicsRouteImport } from './routes/app.academics'
 import { Route as AppEventsIndexRouteImport } from './routes/app.events.index'
 import { Route as AppClubsIndexRouteImport } from './routes/app.clubs.index'
+import { Route as AppLearnMaterialIdRouteImport } from './routes/app.learn.$materialId'
 import { Route as AppEventsEventIdRouteImport } from './routes/app.events.$eventId'
 import { Route as AppClubsClubIdRouteImport } from './routes/app.clubs.$clubId'
 
@@ -120,6 +121,11 @@ const AppClubsIndexRoute = AppClubsIndexRouteImport.update({
   path: '/clubs/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppLearnMaterialIdRoute = AppLearnMaterialIdRouteImport.update({
+  id: '/$materialId',
+  path: '/$materialId',
+  getParentRoute: () => AppLearnRoute,
+} as any)
 const AppEventsEventIdRoute = AppEventsEventIdRouteImport.update({
   id: '/events/$eventId',
   path: '/events/$eventId',
@@ -141,7 +147,7 @@ export interface FileRoutesByFullPath {
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
-  '/app/learn': typeof AppLearnRoute
+  '/app/learn': typeof AppLearnRouteWithChildren
   '/app/mentorship': typeof AppMentorshipRoute
   '/app/navigate': typeof AppNavigateRoute
   '/app/profile': typeof AppProfileRoute
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/learn/$materialId': typeof AppLearnMaterialIdRoute
   '/app/clubs/': typeof AppClubsIndexRoute
   '/app/events/': typeof AppEventsIndexRoute
 }
@@ -162,7 +169,7 @@ export interface FileRoutesByTo {
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
-  '/app/learn': typeof AppLearnRoute
+  '/app/learn': typeof AppLearnRouteWithChildren
   '/app/mentorship': typeof AppMentorshipRoute
   '/app/navigate': typeof AppNavigateRoute
   '/app/profile': typeof AppProfileRoute
@@ -171,6 +178,7 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/learn/$materialId': typeof AppLearnMaterialIdRoute
   '/app/clubs': typeof AppClubsIndexRoute
   '/app/events': typeof AppEventsIndexRoute
 }
@@ -185,7 +193,7 @@ export interface FileRoutesById {
   '/app/ai': typeof AppAiRoute
   '/app/announcements': typeof AppAnnouncementsRoute
   '/app/feedback': typeof AppFeedbackRoute
-  '/app/learn': typeof AppLearnRoute
+  '/app/learn': typeof AppLearnRouteWithChildren
   '/app/mentorship': typeof AppMentorshipRoute
   '/app/navigate': typeof AppNavigateRoute
   '/app/profile': typeof AppProfileRoute
@@ -194,6 +202,7 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/app/clubs/$clubId': typeof AppClubsClubIdRoute
   '/app/events/$eventId': typeof AppEventsEventIdRoute
+  '/app/learn/$materialId': typeof AppLearnMaterialIdRoute
   '/app/clubs/': typeof AppClubsIndexRoute
   '/app/events/': typeof AppEventsIndexRoute
 }
@@ -218,6 +227,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
+    | '/app/learn/$materialId'
     | '/app/clubs/'
     | '/app/events/'
   fileRoutesByTo: FileRoutesByTo
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
+    | '/app/learn/$materialId'
     | '/app/clubs'
     | '/app/events'
   id:
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/app/'
     | '/app/clubs/$clubId'
     | '/app/events/$eventId'
+    | '/app/learn/$materialId'
     | '/app/clubs/'
     | '/app/events/'
   fileRoutesById: FileRoutesById
@@ -401,6 +413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppClubsIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/learn/$materialId': {
+      id: '/app/learn/$materialId'
+      path: '/$materialId'
+      fullPath: '/app/learn/$materialId'
+      preLoaderRoute: typeof AppLearnMaterialIdRouteImport
+      parentRoute: typeof AppLearnRoute
+    }
     '/app/events/$eventId': {
       id: '/app/events/$eventId'
       path: '/events/$eventId'
@@ -418,12 +437,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppLearnRouteChildren {
+  AppLearnMaterialIdRoute: typeof AppLearnMaterialIdRoute
+}
+
+const AppLearnRouteChildren: AppLearnRouteChildren = {
+  AppLearnMaterialIdRoute: AppLearnMaterialIdRoute,
+}
+
+const AppLearnRouteWithChildren = AppLearnRoute._addFileChildren(
+  AppLearnRouteChildren,
+)
+
 interface AppRouteChildren {
   AppAcademicsRoute: typeof AppAcademicsRoute
   AppAiRoute: typeof AppAiRoute
   AppAnnouncementsRoute: typeof AppAnnouncementsRoute
   AppFeedbackRoute: typeof AppFeedbackRoute
-  AppLearnRoute: typeof AppLearnRoute
+  AppLearnRoute: typeof AppLearnRouteWithChildren
   AppMentorshipRoute: typeof AppMentorshipRoute
   AppNavigateRoute: typeof AppNavigateRoute
   AppProfileRoute: typeof AppProfileRoute
@@ -441,7 +472,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppAiRoute: AppAiRoute,
   AppAnnouncementsRoute: AppAnnouncementsRoute,
   AppFeedbackRoute: AppFeedbackRoute,
-  AppLearnRoute: AppLearnRoute,
+  AppLearnRoute: AppLearnRouteWithChildren,
   AppMentorshipRoute: AppMentorshipRoute,
   AppNavigateRoute: AppNavigateRoute,
   AppProfileRoute: AppProfileRoute,
