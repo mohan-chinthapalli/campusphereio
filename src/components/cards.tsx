@@ -283,9 +283,12 @@ export function MaterialCard({ material }: { material: Material }) {
         </div>
       </div>
       <div className="mt-4 flex gap-2">
-        <Button variant="soft" className="flex-1" onClick={() => toast.success("Opening resource")}>
-          {material.type === "Video" ? "Watch" : "Read"}
+        <Button variant="soft" className="flex-1" asChild>
+          <Link to="/app/learn/$materialId" params={{ materialId: material.id }}>
+            {material.type === "Video" ? "Watch" : "Read"}
+          </Link>
         </Button>
+
         <Button variant="outline" size="icon" aria-label="Download" onClick={() => toast.success("Download started")}>
           <Download />
         </Button>
