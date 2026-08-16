@@ -270,9 +270,10 @@ function Landing() {
             <Link to="/login" className="hover:text-foreground">
               Log in
             </Link>
-            <Link to="/signup" className="hover:text-foreground">
-              Sign up
+            <Link to="/forgot-password" className="hover:text-foreground">
+              Reset password
             </Link>
+
             <Link to="/app/feedback" className="hover:text-foreground">
               Feedback
             </Link>
