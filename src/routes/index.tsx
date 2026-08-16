@@ -163,8 +163,9 @@ function Landing() {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/signup">Create an account</Link>
+              <Link to="/login">Sign in</Link>
             </Button>
+
           </div>
 
           <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-border bg-card p-2 elevate">
