@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { MailCheck } from "lucide-react";
+import { Loader2, MailCheck } from "lucide-react";
+import { toast } from "sonner";
+import { sendPasswordReset } from "@/lib/auth-mock";
+
 import { AuthLayout } from "@/components/auth-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,13 +23,15 @@ export const Route = createFileRoute("/forgot-password")({
 
 function ForgotPage() {
   const [sent, setSent] = useState(false);
+  const [email, setEmail] = useState("");
+  const [pending, setPending] = useState(false);
   return (
     <AuthLayout
       title={sent ? "Check your inbox" : "Reset your password"}
       subtitle={
         sent
-          ? "We sent a secure reset link to your university email. It expires in 20 minutes."
-          : "Enter your university email and we will send you a reset link."
+          ? "We sent a secure reset link to your institution email. It expires in 20 minutes."
+          : "Enter your institution email and we will send you a reset link."
       }
       footer={
         <Link to="/login" className="font-medium text-primary hover:underline">
@@ -50,16 +55,30 @@ function ForgotPage() {
       ) : (
         <form
           className="space-y-4"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
-            setSent(true);
+            setPending(true);
+            // Demo only — swap sendPasswordReset() in src/lib/auth-mock.ts for a real email service.
+            const res = await sendPasswordReset(email);
+            setPending(false);
+            if (res.ok) setSent(true);
+            else toast.error("Enter a valid institution email");
           }}
         >
           <div className="space-y-2">
-            <Label htmlFor="femail">University email</Label>
-            <Input id="femail" type="email" placeholder="you@campusphere.edu" required className="h-11 rounded-xl" />
+            <Label htmlFor="femail">Institution email</Label>
+            <Input
+              id="femail"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@campusphere.edu"
+              required
+              className="h-11 rounded-xl"
+            />
           </div>
-          <Button variant="hero" size="lg" className="w-full" type="submit">
+          <Button variant="hero" size="lg" className="w-full" type="submit" disabled={pending}>
+            {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
             Send reset link
           </Button>
         </form>
@@ -67,3 +86,4 @@ function ForgotPage() {
     </AuthLayout>
   );
 }
+

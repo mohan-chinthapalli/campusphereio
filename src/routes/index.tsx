@@ -163,8 +163,9 @@ function Landing() {
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/signup">Create an account</Link>
+              <Link to="/login">Sign in</Link>
             </Button>
+
           </div>
 
           <div className="mx-auto mt-16 max-w-5xl overflow-hidden rounded-3xl border border-border bg-card p-2 elevate">
@@ -239,8 +240,9 @@ function Landing() {
                     <Link to="/app">Explore the platform</Link>
                   </Button>
                   <Button variant="glass" size="lg" asChild>
-                    <Link to="/signup">Request a demo</Link>
+                    <Link to="/login">Sign in</Link>
                   </Button>
+
                 </div>
               </div>
               <ul className="space-y-3 text-sm">
@@ -268,9 +270,10 @@ function Landing() {
             <Link to="/login" className="hover:text-foreground">
               Log in
             </Link>
-            <Link to="/signup" className="hover:text-foreground">
-              Sign up
+            <Link to="/forgot-password" className="hover:text-foreground">
+              Reset password
             </Link>
+
             <Link to="/app/feedback" className="hover:text-foreground">
               Feedback
             </Link>
