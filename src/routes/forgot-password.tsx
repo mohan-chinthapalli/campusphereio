@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { MailCheck } from "lucide-react";
+import { Loader2, MailCheck } from "lucide-react";
+import { toast } from "sonner";
+import { sendPasswordReset } from "@/lib/auth-mock";
+
 import { AuthLayout } from "@/components/auth-layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
