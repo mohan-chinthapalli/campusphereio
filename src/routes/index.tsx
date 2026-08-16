@@ -240,8 +240,9 @@ function Landing() {
                     <Link to="/app">Explore the platform</Link>
                   </Button>
                   <Button variant="glass" size="lg" asChild>
-                    <Link to="/signup">Request a demo</Link>
+                    <Link to="/login">Sign in</Link>
                   </Button>
+
                 </div>
               </div>
               <ul className="space-y-3 text-sm">
