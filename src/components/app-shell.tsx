@@ -127,15 +127,29 @@ function SidebarBody({ collapsed, onNavigate }: { collapsed?: boolean; onNavigat
                       to={item.to as never}
                       onClick={onNavigate}
                       title={collapsed ? item.label : undefined}
+                      aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                        "group relative flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium outline-none transition-all duration-200",
+                        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-sidebar",
                         collapsed && "justify-center px-0",
                         active
-                          ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                          : "text-sidebar-foreground hover:bg-sidebar-accent/60",
+                          ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-sm"
+                          : "text-sidebar-foreground hover:translate-x-0.5 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
                       )}
                     >
-                      <item.icon className="h-4.5 w-4.5 shrink-0" />
+                      <span
+                        className={cn(
+                          "absolute left-0 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-primary transition-all duration-200",
+                          active ? "opacity-100" : "opacity-0",
+                          collapsed && "left-0",
+                        )}
+                      />
+                      <item.icon
+                        className={cn(
+                          "h-4.5 w-4.5 shrink-0 transition-transform duration-200",
+                          active ? "text-primary" : "group-hover:scale-110",
+                        )}
+                      />
                       {!collapsed ? <span className="truncate">{item.label}</span> : null}
                     </Link>
                   </li>
