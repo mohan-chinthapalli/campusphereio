@@ -29,7 +29,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "The digital campus platform students actually want to open every day. Events, clubs, mentorship, learning and AI.",
+          "A centralized digital campus experience: events, clubs, mentorship, faculty skill sessions, navigation, learning resources and AI in one place.",
       },
     ],
   }),

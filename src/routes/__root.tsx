@@ -82,17 +82,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "CampuSphere is the digital campus platform for events, clubs, mentorship, learning and AI — built for modern universities.",
+          "A centralized digital campus experience: events, clubs, mentorship, faculty skill sessions, navigation, learning resources and AI in one place.",
       },
       { name: "author", content: "CampuSphere" },
       { property: "og:title", content: "CampuSphere — One Platform. Every Campus Need." },
       {
         property: "og:description",
-        content: "Events, clubs, mentorship, learning and AI in one modern campus platform.",
+        content: "A centralized digital campus experience: events, clubs, mentorship, faculty skill sessions, navigation, learning resources and AI in one place.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "CampuSphere — One Platform. Every Campus Need." },
+      { name: "twitter:description", content: "A centralized digital campus experience: events, clubs, mentorship, faculty skill sessions, navigation, learning resources and AI in one place." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cc10644b248c233f68a880e0d4441663/id-preview-3b7b14d7--2cb7387c-ea5d-4e90-b5c7-c88a9e340910.lovable.app-1786871203254.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/cc10644b248c233f68a880e0d4441663/id-preview-3b7b14d7--2cb7387c-ea5d-4e90-b5c7-c88a9e340910.lovable.app-1786871203254.png" },
     ],
     links: [
       {
